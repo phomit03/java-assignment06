@@ -6,16 +6,20 @@ import java.util.ArrayList;
 public class SinhVien {
     private int id;
     private String name;
-    private LocalDate dateOfBirth;
+    private int dateOfBirth;
     private String address;
     private float gpa; //điểm trung bình của sinh viên
 
-    public SinhVien(int id, String name, LocalDate dateOfBirth, String address, float gpa) {
+    public SinhVien(int id, String name, int dateOfBirth, String address, float gpa) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.gpa = gpa;
+    }
+
+    public SinhVien() {
+
     }
 
     public int getId() {
@@ -34,11 +38,11 @@ public class SinhVien {
         this.name = name;
     }
 
-    public LocalDate getDateOfBirth() {
+    public int getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(int dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
