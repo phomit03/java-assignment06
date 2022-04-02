@@ -1,9 +1,7 @@
 package lab01;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 public class QuanLySinhVien extends SinhVien{
@@ -29,40 +27,41 @@ public class QuanLySinhVien extends SinhVien{
 
 
     //input
-    private int inputID(){
+    public int inputID(){
         System.out.print("Input student ID: ");
         while (true) {
             try {
                 int id = sc.nextInt();
                 return id;
-            } catch (Exception ex) {
+            } catch (NumberFormatException ex) {
                 System.out.print("Invalid! Input student ID again: ");
             }
         }
     }
-    private String inputName() {
+    public String inputName() {
         System.out.print("Input student name: ");
         return sc.nextLine();
     }
-    private int inputBirth() {
+    public int inputBirth() {
         System.out.print("Input student dateOfBirth: ");
         while (true) {
             try {
                 int birth = sc.nextInt();
-                if (birth < 0 && birth > 100) {
+                if (birth < 0 && birth > 150) {  //ít hơn 150 tuổi cho đỡ tài nguyên :v
                     throw new NumberFormatException();
                 }
                 return birth;
-            } catch (Exception ex) {
+            } catch (NumberFormatException ex) {
                 System.out.print("Invalid! Input student ID again: ");
             }
         }
     }
-    private String inputAddress(){
+    public String inputAddress(){
         System.out.print("Input student address: ");
+        sc.nextLine();
         return sc.nextLine();
     }
-    private float inputGpa(){
+    public float inputGpa(){
         System.out.print("Input student medium score: ");
         while (true) {
             try {
@@ -79,7 +78,8 @@ public class QuanLySinhVien extends SinhVien{
 
 
     //phương thức
-    public void addStudent(int id){
+    public void addStudent(){
+        int id;
         if(svList.size() > 0){
             id = svList.size() + 1;
         } else{
@@ -110,7 +110,7 @@ public class QuanLySinhVien extends SinhVien{
         if (!isExisted) {
             System.out.printf("ID = %d not existed.\n", id);
         } else {
-            System.out.printf("Updated success!\n", id);
+            System.out.printf("\nUpdated success ID = %d!\n", id);
         }
     }
 
@@ -119,47 +119,34 @@ public class QuanLySinhVien extends SinhVien{
         for (int i = 0; i < svList.size(); i++) {
             if (svList.get(i).getId() == id) {
                 sv = svList.get(i);
-                return;
+                break;
             }
         }
         if (sv != null) {
             svList.remove(sv);
+            System.out.printf("\nDeleted success ID = %d!\n", id);
         } else {
             System.out.printf("ID = %d not existed.\n", id);
         }
     }
 
-    public class sortByGpa implements Comparator<SinhVien>{
-        @Override
-        public int compare(SinhVien student1, SinhVien student2) {
-            if (student1.getGpa() > student2.getGpa()) {
-                return 1;
-            }
-            return -1;
-        }
-    }
-    public void SortByGpa(){
-        Collections.sort(svList, new sortByGpa());
+    public void sortByGpa(){
+        Collections.sort(svList, new SortByGpa());
         System.out.println("Sort students by gpa successfully!\n");
     }
 
     public void sortByName(){
-        Collections.sort(svList, new Comparator<SinhVien>() {
-            @Override
-            public int compare(SinhVien student1, SinhVien student2) {
-                return student1.getName().compareTo(student2.getName());
-            }
-        });
+        Collections.sort(svList, new SortByName());
         System.out.println("Sort students by name successfully!\n");
     }
 
     public void showStudent() {
-        for (SinhVien student : svList) {
-            System.out.format("%5d | ", student.getId());
-            System.out.format("%15s | ", student.getName());
-            System.out.format("%5d | ", student.getDateOfBirth());
-            System.out.format("%15s | ", student.getAddress());
-            System.out.format("%5.1f%n", student.getGpa());
+        if (svList.size()==0) System.out.println("List is empty");
+        else{
+            System.out.println("|   ID |    Student's name    |  Date of birth  |      Address      |  GPA  |");
+            for (SinhVien student : svList) {
+                System.out.format("| %4d | %20s | %15d | %17s | %5.2f |\n",student.getId(),student.getName(),student.getDateOfBirth(),student.getAddress(),student.getGpa());
+            }
         }
     }
 
