@@ -39,8 +39,10 @@ public class QuanLySinhVien extends SinhVien{
         }
     }
     public String inputName() {
+
         System.out.print("Input student name: ");
-        return sc.nextLine();
+        String name =sc.next();
+        return name;
     }
     public int inputBirth() {
         System.out.print("Input student dateOfBirth: ");
@@ -58,8 +60,8 @@ public class QuanLySinhVien extends SinhVien{
     }
     public String inputAddress(){
         System.out.print("Input student address: ");
-        sc.nextLine();
-        return sc.nextLine();
+        String address =  sc.next();
+        return address;
     }
     public float inputGpa(){
         System.out.print("Input student medium score: ");

@@ -9,7 +9,7 @@ public class Main {
         int x;
         int studentID;
 
-        for (; ; ) {
+        while (true) {
             System.out.println("\n-----------Menu------------");
             System.out.println("Choose the function you want:");
             System.out.println("1. Add student");
